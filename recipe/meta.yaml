@@ -1,6 +1,6 @@
 {% set name = "python-ligo-lw" %}
-{% set version = "1.4.0" %}
-{% set sha256 = "da24692a15e7412b2ebfef2dac90d0af9aeb6da324daad773e8140256544ea0d" %}
+{% set version = "1.5.2" %}
+{% set sha256 = "f4b8dfceceb2b04739d99d99807c32caf2a446a77912339e891d365cd1ba9326" %}
 
 package:
   name: {{ name }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1000
+  number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   skip: true  # [win]
 
