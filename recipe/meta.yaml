@@ -1,6 +1,6 @@
 {% set name = "python-ligo-lw" %}
-{% set version = "1.4.0" %}
-{% set sha256 = "da24692a15e7412b2ebfef2dac90d0af9aeb6da324daad773e8140256544ea0d" %}
+{% set version = "1.5.2" %}
+{% set sha256 = "f4b8dfceceb2b04739d99d99807c32caf2a446a77912339e891d365cd1ba9326" %}
 
 package:
   name: {{ name }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1000
+  number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   skip: true  # [win]
 
@@ -24,11 +24,15 @@ requirements:
     - setuptools
     - pip
   run:
+    - ligo-common
+    - ligo-segments
+    - lscsoft-glue
     - python
-    - six
     - pyyaml
     - python-lal >=6.19.0
-    - lscsoft-glue
+    - six
+  run_constrained:
+    - lscsoft-glue >=1.60.0=*_1
 
 test:
   imports:
@@ -51,10 +55,18 @@ test:
     - ligo.lw.utils.segments
     - ligo.lw.utils.time_slide
   commands:
+    # validate executables
     - ligolw_add --help
     - ligolw_cut --help
+    - ligolw_no_ilwdchar --help
     - ligolw_print --help
+    - ligolw_segments --help
     - ligolw_sqlite --help
+    # check links
+    - conda inspect linkages -p ${PREFIX} ${PKG_NAME}  # [not win]
+    - conda inspect objects -p ${PREFIX} ${PKG_NAME}  # [osx]
+
+
 
 about:
   home: https://git.ligo.org/kipp.cannon/{{ name }}
