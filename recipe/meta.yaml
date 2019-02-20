@@ -24,11 +24,15 @@ requirements:
     - setuptools
     - pip
   run:
+    - ligo-common
+    - ligo-segments
+    - lscsoft-glue
     - python
-    - six
     - pyyaml
     - python-lal >=6.19.0
-    - lscsoft-glue
+    - six
+  run_constrained:
+    - lscsoft-glue >=1.60.0=*_1
 
 test:
   imports:
@@ -51,10 +55,18 @@ test:
     - ligo.lw.utils.segments
     - ligo.lw.utils.time_slide
   commands:
+    # validate executables
     - ligolw_add --help
     - ligolw_cut --help
+    - ligolw_no_ilwdchar --help
     - ligolw_print --help
+    - ligolw_segments --help
     - ligolw_sqlite --help
+    # check links
+    - conda inspect linkages -p ${PREFIX} ${PKG_NAME}  # [not win]
+    - conda inspect objects -p ${PREFIX} ${PKG_NAME}  # [osx]
+
+
 
 about:
   home: https://git.ligo.org/kipp.cannon/{{ name }}
