@@ -3,7 +3,7 @@ About python-ligo-lw
 
 Home: https://git.ligo.org/kipp.cannon/python-ligo-lw
 
-Package license: GPLv3
+Package license: GPL-3.0-or-later
 
 Feedstock license: BSD 3-Clause
 

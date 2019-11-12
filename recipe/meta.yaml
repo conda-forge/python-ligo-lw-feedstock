@@ -1,28 +1,29 @@
 {% set name = "python-ligo-lw" %}
-{% set version = "1.5.3" %}
-{% set sha256 = "dee77f85c93a844a3fc81059ac05c69e40f6d78a7070781cf3f6d0be6c3e3388" %}
+{% set version = "1.6.0" %}
+{% set sha256 = "5afb242628f9c77b9df40f59e4fd9ba0e09322ab42347d5b84b1e4fd9dd32c9a" %}
 
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: "{{ sha256 }}"
 
 build:
+  error_overdepending: true
+  error_overlinking: true
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  script: "{{ PYTHON }} -m pip install . -vv"
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
   host:
+    - pip
     - python
     - setuptools
-    - pip
   run:
     - ligo-common
     - ligo-segments
@@ -56,25 +57,21 @@ test:
     - ligo.lw.utils.segments
     - ligo.lw.utils.time_slide
   commands:
-    # validate executables
     - ligolw_add --help
     - ligolw_cut --help
     - ligolw_no_ilwdchar --help
     - ligolw_print --help
     - ligolw_segments --help
     - ligolw_sqlite --help
-    # check links
-    - conda inspect linkages -p ${PREFIX} ${PKG_NAME}  # [not win]
-    - conda inspect objects -p ${PREFIX} ${PKG_NAME}  # [osx]
-
-
 
 about:
-  home: https://git.ligo.org/kipp.cannon/{{ name }}
-  license: GPLv3
-  license_family: GPL
-  license_file: LICENSE
-  summary: LIGO Light-Weight XML I/O Library
+  home: "https://git.ligo.org/kipp.cannon/python-ligo-lw"
+  doc_url: "https://docs.ligo.org/kipp.cannon/python-ligo-lw/"
+  dev_url: "https://git.ligo.org/kipp.cannon/python-ligo-lw"
+  license: "GPL-3.0-or-later"
+  license_family: "GPL"
+  license_file: "LICENSE"
+  summary: "LIGO Light-Weight XML I/O Library"
   description: |
     The LIGO Light-Weight XML format is widely used within gravitational-wave
     data analysis pipelines.  This package provides a Python library to read,
