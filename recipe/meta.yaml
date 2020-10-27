@@ -32,6 +32,7 @@ requirements:
     - pyyaml
     - python-lal >=6.19.0
     - six
+    - tqdm
   run_constrained:
     # pin to lscsoft-glue-2.0.0 to prevent file clobbering
     - lscsoft-glue >=2.0.0
