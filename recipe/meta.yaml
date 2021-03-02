@@ -13,7 +13,7 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
 
@@ -39,7 +39,7 @@ requirements:
 
 test:
   requires:               # [py>=37]
-    - matplotlib          # [py>=37]
+    - matplotlib-base          # [py>=37]
   source_files:           # [py>=37]
     - test/               # [py>=37]
   commands:               # [py>=37]
