@@ -39,7 +39,7 @@ requirements:
 
 test:
   requires:               # [py>=37]
-    - matplotlib-base          # [py>=37]
+    - matplotlib-base     # [py>=37]
   source_files:           # [py>=37]
     - test/               # [py>=37]
   commands:               # [py>=37]
