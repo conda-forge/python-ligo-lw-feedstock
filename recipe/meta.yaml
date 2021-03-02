@@ -38,12 +38,12 @@ requirements:
     - lscsoft-glue >=2.0.0
 
 test:
-  requires:
-    - matplotlib
-  source_files:
-    - test/
-  commands:
-    - make -C test check
+  requires:               # [py>=37]
+    - matplotlib          # [py>=37]
+  source_files:           # [py>=37]
+    - test/               # [py>=37]
+  commands:               # [py>=37]
+    - make -C test check  # [py>=37]
 
 about:
   home: https://git.ligo.org/kipp.cannon/python-ligo-lw
