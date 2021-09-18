@@ -13,7 +13,7 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
 
@@ -30,20 +30,21 @@ requirements:
     - lscsoft-glue
     - python
     - pyyaml
-    - python-lal >=6.19.0
+    - python-lal >=6.19.0  # [not (osx and arm64)]
     - six
     - tqdm
   run_constrained:
     # pin to lscsoft-glue-2.0.0 to prevent file clobbering
     - lscsoft-glue >=2.0.0
+    - python-lal >=6.19.0  # [osx and arm64]
 
 test:
-  requires:               # [py>=37]
-    - matplotlib          # [py>=37]
-  source_files:           # [py>=37]
-    - test/               # [py>=37]
-  commands:               # [py>=37]
-    - make -C test check  # [py>=37]
+  requires:               # [py>=37 and not (osx and arm64)]
+    - matplotlib          # [py>=37 and not (osx and arm64)]
+  source_files:           # [py>=37 and not (osx and arm64)]
+    - test/               # [py>=37 and not (osx and arm64)]
+  commands:               # [py>=37 and not (osx and arm64)]
+    - make -C test check  # [py>=37 and not (osx and arm64)]
 
 about:
   home: https://git.ligo.org/kipp.cannon/python-ligo-lw
