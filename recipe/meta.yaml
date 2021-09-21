@@ -46,7 +46,7 @@ test:
     - pip
   source_files:                                         # [py>=37]
     - test/                                             # [py>=37]
-  commands:                                             # [py>=37]
+  commands:
     # check requirements
     - python -m pip check
     # run test suite
