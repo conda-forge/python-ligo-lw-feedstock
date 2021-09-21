@@ -13,37 +13,44 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    # extras for cross-compiling python
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - python                                 # [build_platform != target_platform]
   host:
     - pip
     - python
     - setuptools
   run:
-    - ligo-common
     - ligo-segments
-    - lscsoft-glue
+    - lscsoft-glue >=2.0.0
+    - numpy
     - python
-    - pyyaml
+    - python-dateutil
     - python-lal >=6.19.0
+    - pyyaml
     - six
     - tqdm
-  run_constrained:
-    # pin to lscsoft-glue-2.0.0 to prevent file clobbering
-    - lscsoft-glue >=2.0.0
 
 test:
-  requires:               # [py>=37]
-    - matplotlib          # [py>=37]
-  source_files:           # [py>=37]
-    - test/               # [py>=37]
-  commands:               # [py>=37]
-    - make -C test check  # [py>=37]
+  requires:
+    - pip
+  commands:
+    # check requirements
+    - python -m pip check
+    # sanity check command-line scripts
+    - ligolw_add --help
+    - ligolw_cut --help
+    - ligolw_no_ilwdchar --help
+    - ligolw_print --help
+    - ligolw_segments --help
+    - ligolw_sqlite --help
 
 about:
   home: https://git.ligo.org/kipp.cannon/python-ligo-lw
