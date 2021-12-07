@@ -9,6 +9,9 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # https://git.ligo.org/kipp.cannon/python-ligo-lw/-/issues/22
+    - pyunicode.patch
 
 build:
   error_overdepending: true
