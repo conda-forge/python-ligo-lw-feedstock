@@ -1,6 +1,5 @@
 {% set name = "python-ligo-lw" %}
-{% set version = "1.7.1" %}
-{% set sha256 = "0b9476d5edaf17ef9036ec17344645129b752097446d6001725ad41ce7d4f206" %}
+{% set version = "1.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,15 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
-  patches:
-    # https://git.ligo.org/kipp.cannon/python-ligo-lw/-/issues/22
-    - pyunicode.patch
+  sha256: 13707815d44db2dc3c097efe96e98548733a6fcec6f864b85c86af2fa96035c3
 
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
 
