@@ -1,5 +1,5 @@
 {% set name = "python-ligo-lw" %}
-{% set version = "1.8.1" %}
+{% set version = "1.8.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 0ab2ab858feca6f832f03bb952b2e302279cfb08716bbd0e6b6e0f61a7b3a09a
+  sha256: 424912428a99fa121c071ddb90087b183514878229d4a651c144c649f3780aef
 
 build:
   error_overdepending: true
