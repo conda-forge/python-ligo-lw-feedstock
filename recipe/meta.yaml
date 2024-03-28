@@ -8,6 +8,9 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 424912428a99fa121c071ddb90087b183514878229d4a651c144c649f3780aef
+  patches:
+    # see https://git.ligo.org/kipp/python-ligo-lw/-/issues/29
+    - 0001-fix-compilation-on-Python-3.12-with-new-clang.patch
 
 build:
   error_overdepending: true

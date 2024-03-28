@@ -1,0 +1,54 @@
+From 75cac96e6e0cc9b51880d560e4b9589e0a082cc9 Mon Sep 17 00:00:00 2001
+From: Duncan Macleod <duncan.macleod@ligo.org>
+Date: Thu, 28 Mar 2024 09:35:38 +0000
+Subject: [PATCH] fix compilation on Python 3.12 with new clang
+
+see https://git.ligo.org/kipp/python-ligo-lw/-/issues/29
+---
+ ligo/lw/tokenizer.RowBuilder.c | 2 +-
+ ligo/lw/tokenizer.RowDumper.c  | 2 +-
+ ligo/lw/tokenizer.Tokenizer.c  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/ligo/lw/tokenizer.RowBuilder.c b/ligo/lw/tokenizer.RowBuilder.c
+index 1ecdf9d2f3..b3af1da41d 100644
+--- a/ligo/lw/tokenizer.RowBuilder.c
++++ b/ligo/lw/tokenizer.RowBuilder.c
+@@ -228,7 +228,7 @@ static struct PyMethodDef methods[] = {
+ 
+ 
+ PyTypeObject ligolw_RowBuilder_Type = {
+-	PyObject_HEAD_INIT(NULL)
++	PyVarObject_HEAD_INIT(NULL, 0)
+ 	.tp_basicsize = sizeof(ligolw_RowBuilder),
+ 	.tp_dealloc = __del__,
+ 	.tp_doc =
+diff --git a/ligo/lw/tokenizer.RowDumper.c b/ligo/lw/tokenizer.RowDumper.c
+index f3d693a43f..d5d893fd4a 100644
+--- a/ligo/lw/tokenizer.RowDumper.c
++++ b/ligo/lw/tokenizer.RowDumper.c
+@@ -280,7 +280,7 @@ static struct PyMethodDef methods[] = {
+ 
+ 
+ PyTypeObject ligolw_RowDumper_Type = {
+-	PyObject_HEAD_INIT(NULL)
++	PyVarObject_HEAD_INIT(NULL, 0)
+ 	.tp_basicsize = sizeof(ligolw_RowDumper),
+ 	.tp_dealloc = __del__,
+ 	.tp_doc =
+diff --git a/ligo/lw/tokenizer.Tokenizer.c b/ligo/lw/tokenizer.Tokenizer.c
+index 82b71346fc..15185311f7 100644
+--- a/ligo/lw/tokenizer.Tokenizer.c
++++ b/ligo/lw/tokenizer.Tokenizer.c
+@@ -738,7 +738,7 @@ static struct PyGetSetDef getset[] = {
+ 
+ 
+ PyTypeObject ligolw_Tokenizer_Type = {
+-	PyObject_HEAD_INIT(NULL)
++	PyVarObject_HEAD_INIT(NULL, 0)
+ 	.tp_basicsize = sizeof(ligolw_Tokenizer),
+ 	.tp_dealloc = __del__,
+ 	.tp_doc =
+-- 
+2.44.0
+
