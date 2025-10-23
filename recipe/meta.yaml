@@ -1,13 +1,13 @@
 {% set name = "python-ligo-lw" %}
-{% set version = "1.8.3" %}
+{% set version = "1.8.4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 424912428a99fa121c071ddb90087b183514878229d4a651c144c649f3780aef
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 1ccaefeeda2a1cddca22b021ec88f550e24f87293a6f9753b3912e41cf0c95d1
   patches:
     # see https://git.ligo.org/kipp/python-ligo-lw/-/issues/29
     - 0001-fix-compilation-on-Python-3.12-with-new-clang.patch
@@ -15,7 +15,7 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 4
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
 
